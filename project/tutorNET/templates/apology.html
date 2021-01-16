@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+<link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index.css') }}" />
+{% endblock styles %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/apology.js') }}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+Error
+{% endblock title %}
+
+{% block content %}
+
+<header class="title rounded-pill shadow">
+  <h1>tutorNET</h1>
+</header>
+
+<main class="container d-flex justify-content-center align-items-center">
+  <img
+       src="https://api.memegen.link/images/doge/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg"
+       alt="{{ top }}" />
+</main>
+
+<footer></footer>
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index.css') }}" />
+
+{% endblock styles %}
+
+{% block content %}
+
+<header class="title rounded-pill shadow">
+  <h1>tutorNET</h1>
+</header>
+
+<main class="container d-flex align-items-center">
+  <div class="row no-gutters flex-grow-1">
+    <div class="col-md-4 align-self-center">
+      <p class="sub-title">Closing the gap for education</p>
+      <div class="btn-wrapper">
+        <p class="btn-label">Student?</p>
+        <a class="btn btn-outline-primary"
+           href="/find-teacher">
+          <svg class="bi"
+               width="32"
+               height="32"
+               fill="currentColor">
+            <use xlink:href="../static/icons/bootstrap-icons.svg#book" />
+          </svg>
+          Find Teacher</a>
+      </div>
+      <div class="btn-wrapper mb-0">
+        <p class="btn-label">Teacher?</p>
+        <a class="btn btn-outline-secondary"
+           href="/register">
+          <svg class="bi"
+               width="32"
+               height="32"
+               fill="currentColor">
+            <use xlink:href="../static/icons/bootstrap-icons.svg#door-open" />
+          </svg>
+          Register</a>
+      </div>
+      <hr>
+      <small class="form-text text-muted text-center mb-2">Already registered?</small>
+      {% if session['user_id'] %}
+      <a class="btn btn-success" href="/profile" id="login-btn">
+        <svg class="bi"
+             width="32"
+             height="32"
+             fill="currentColor">
+          <use xlink:href="../static/icons/bootstrap-icons.svg#key" />
+        </svg>Login</a>
+      {% else %}
+      <a class="btn btn-success" href="/login" id="login-btn">
+        <svg class="bi"
+             width="32"
+             height="32"
+             fill="currentColor">
+          <use xlink:href="../static/icons/bootstrap-icons.svg#key" />
+        </svg>Login</a>
+      {% endif %}
+    </div>
+    <div class="col-md">
+      <img src="{{ url_for('static', filename='images/SCENE.svg') }}"
+           class="img-fluid"
+           alt="" />
+    </div>
+  </div>
+</main>
+
+<footer class="citation">
+  <p>
+    <em>The only thing that everyone receives equally is an uneven reality</em><cite>
+      - Fushiguro Megumi (Jujutsu Kaisen)</cite>
+  </p>
+</footer>
+
+{% endblock content %}

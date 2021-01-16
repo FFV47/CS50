@@ -1,0 +1,29 @@
+{% extends 'layout.html' %} {% block style %}
+
+<style>
+	h2,
+	form {
+		display: inline-block;
+	}
+
+	button {
+		margin-left: 1rem;
+	}
+</style>
+
+{% endblock %} {% block body %}
+
+<h1>Tasks</h1>
+<ul>
+	{% for task in taskList %}
+	<li class="item">
+		<h2>{{task}}</h2>
+		<form action="/updatelist" method="POST">
+			<button type="submit" name="item" value="{{task}}">Remove Item</button>
+		</form>
+	</li>
+	{% endfor %}
+</ul>
+
+<a href="/add">Create new Task</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %} {% block style %}
+<style>
+	form {
+		display: flex;
+		flex-flow: column;
+		align-items: flex-start;
+	}
+
+	form > * {
+		margin-bottom: 1rem;
+	}
+</style>
+{% endblock %} {% block body %}
+
+<h1>Register Form</h1>
+
+<form action="/register" method="POST">
+	<input type="text" name="name" id="name" placeholder="Name" />
+	<input type="email" name="email" id="email" placeholder="Email Address" />
+	<input type="submit" value="Submit Form" />
+</form>
+
+{% endblock %}

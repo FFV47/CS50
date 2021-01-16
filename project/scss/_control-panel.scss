@@ -1,0 +1,126 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "main";
+
+header {
+	height: 12vh;
+	max-height: 20vh;
+	width: 70%;
+	margin: 0 auto;
+	background-color: theme-color("secondary");
+	grid-area: header;
+}
+
+aside {
+	grid-area: sidebar;
+	position: relative;
+	nav {
+		font-size: 0.9rem;
+		width: 70%;
+		margin: 0 auto;
+		border-radius: 1rem;
+	}
+}
+
+main {
+	grid-area: main;
+}
+
+.title {
+	@include center();
+	@include brand(theme-color("terciary"));
+	h1 {
+		font-size: 2.3rem;
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+}
+
+.toast {
+  border-radius: 1rem;
+	background-color: $primary;
+	position: absolute;
+	top: 3vh;
+	left: 0;
+	right: 0;
+  margin: 0 auto;
+  z-index: 1;
+
+  .toast-header {
+    border-radius: 0.9rem 0.9rem 0 0;
+  }
+
+	.toast-body {
+		color: white;
+	}
+}
+
+#card-body {
+	font-size: 0.9rem;
+
+	button {
+		font-size: 0.9rem;
+	}
+}
+
+#user {
+  color: white;
+  margin-bottom: 0;
+  padding: 0.5rem 1rem;
+  background-color: $terciary;
+}
+
+@include media-breakpoint-down(sm) {
+	.toast {
+		max-width: 90vw;
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.toast {
+		font-size: 1.25rem;
+	}
+
+	nav,
+	#card-body {
+		font-size: 1rem;
+
+		button {
+			font-size: inherit;
+		}
+	}
+
+	.title h1 {
+		font-size: 4rem;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	body {
+		display: grid;
+		grid-template-areas:
+			"header header"
+			"sidebar main";
+		grid-template-rows: max-content;
+		grid-template-columns: 1fr 6fr;
+
+		height: 97vh;
+	}
+	aside {
+		justify-self: center;
+		nav.nav {
+			font-size: inherit;
+			width: max-content;
+			padding: 0.5rem;
+			height: max-content;
+			position: fixed;
+		}
+	}
+
+	.row > div {
+		margin-left: 5rem;
+	}
+
+	.title h1 {
+		font-size: 5rem;
+	}
+}

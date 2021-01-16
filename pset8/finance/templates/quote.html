@@ -1,0 +1,75 @@
+{% extends 'layout.html' %} {% block title %} Quote {% endblock %} {% block main %}
+
+<div class="page-wrapper">
+	<div class="forms">
+		<form action="/companyname" method="POST">
+			<div class="form-group flex-wrapper">
+				<label for="companyname">Get stock symbol from company name</label>
+				<input
+					autocomplete="on"
+					autofocus
+					class="form-control"
+					name="companyname"
+					placeholder="Company Name"
+					type="text"
+				/>
+			</div>
+			<button class="btn btn-primary form-group" type="submit">Get Symbol</button>
+		</form>
+
+		<form action="/quote" method="POST">
+			<div class="form-group">
+				<input
+					autocomplete="on"
+					autofocus
+					class="form-control"
+					name="symbol"
+					placeholder="Symbol"
+					type="text"
+				/>
+			</div>
+			<button class="btn btn-primary" type="submit">Quote</button>
+		</form>
+	</div>
+
+	{% if rows %}
+
+	<div class="name-table">
+		<table class="table table-striped">
+			<caption>
+				Search Symbol Table (only 10 items shown)
+			</caption>
+			<thead class="thead-dark">
+				<tr>
+					<td>Symbol</td>
+					<td>Company Name</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in rows[0:10] %}
+				<tr>
+					<td>{{row['symbol']}}</td>
+					<td>{{row['name']}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{% elif quote %}
+	<div class="quote">
+		<p>
+			A share of ({{ quote['symbol'] }}) {{ quote['name'] }} costs {{ quote['price'] | usd
+			}}
+		</p>
+		<p class="date-tag">Price on {{ quote['date'] }}</p>
+	</div>
+
+	{% else %}
+	<div class="quote">
+		<p>Company name not found in stock market</p>
+	</div>
+	{% endif %}
+</div>
+
+{% endblock %}

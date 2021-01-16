@@ -1,0 +1,153 @@
+{% extends 'layout.html' %} {% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/subject-handler.css') }}" />
+
+{% endblock styles %} {% block scripts %}
+
+<script src="{{ url_for('static', filename='scripts/addSubject.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/navActive.js') }}" defer></script>
+
+{% endblock scripts %} {% block content %}
+
+<header class="title rounded-pill shadow">
+  <h1>tutorNET</h1>
+</header>
+
+{% block nav %}
+<aside>
+  <nav
+       class="nav flex-column nav-pills align-items-center justify-content-center shadow-lg my-4 py-3 px-1">
+    <p id="user" class="rounded-pill mb-2">
+      {% if session["username"] %}
+      {{ session["username"] }}
+      {% else %}
+      no username
+      {% endif %}
+    </p>
+    <a class="nav-link" href="/profile">Profile</a>
+    <a class="nav-link" href="/update-profile">Update Profile</a>
+    <a class="nav-link" href="/subject-handler">Add/Remove Subject</a>
+    <a class="nav-link" href="/change-password">Change Password</a>
+    <a class="nav-link" href="/find-teacher">Find Teacher</a>
+    <a class="nav-link" href="/delete-account">Delete Account</a>
+    <a class="nav-link" href="/logout">Log Out</a>
+  </nav>
+</aside>
+{% endblock nav %}
+
+<main class="container my-4">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow mb-4">
+        <div class="card-body" id="card-body">
+          <h4 class="text-center">Current Subjects</h4>
+
+          <div class="subject-list">
+            {% for subject in subjects %}
+            <form action="/remove-subject" method="POST">
+              <div class="subject p-2 mb-3">
+
+                <label for="subject">{{ subject.subject }}</label>
+                <input type="hidden" name="subject" value="{{ subject.subject }}">
+                <button type="submit" class="btn btn-danger">Remove Subject</button>
+              </div>
+            </form>
+            {% endfor %}
+
+          </div>
+
+          <hr class="thick-ruler">
+          <h4 class="text-center">Available Subjects</h4>
+
+          <form action="/add-subject" method="POST" id="add-subject-form">
+            <div class="form-group">
+              <label for="subject" class="sr-only">Available Subjects</label>
+              <select name="subject" class="custom-select" required>
+                <option value="" disabled selected hidden>Select a subject</option>
+                <option>English</option>
+                <option>Math</option>
+                <option>Biology</option>
+                <option>Chemistry</option>
+                <option>Earth Sciences</option>
+                <option>Physics</option>
+                <option>Geography</option>
+                <option>History</option>
+                <option>Foreign Languages</option>
+                <option>Extra</option>
+              </select>
+            </div>
+
+            <hr />
+            <div class="d-flex align-items-center">
+              <p class="card-title mb-0 mr-2" id="schedule">Time Table</p>
+              <button type="button" class="btn btn-primary mr-2" id="add-time">
+                New Schedule
+              </button>
+              <button type="button" class="btn btn-danger mr-2" id="remove-time">
+                Remove Schedule
+              </button>
+            </div>
+            <hr />
+
+            <fieldset class="form-row time-table">
+
+              <div class="col-md-4 mb-3">
+                <label for="weekday" class="sr-only" id="weekday-label">Weekday</label>
+                <select name="weekday" id="weekday" class="custom-select" required>
+                  <option value="" selected hidden disabled>Weekday</option>
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                </select>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="time-from" class="sr-only" id="from-label">From</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">From</div>
+                  </div>
+                  <input
+                         type="time"
+                         name="time-from"
+                         id="time-from"
+                         class="form-control timepicker"
+                         step="600"
+                         min="06:00"
+                         max="22:00"
+                         required />
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="time-to" class="sr-only" id="to-label">To</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">To</div>
+                  </div>
+                  <input
+                         type="time"
+                         name="time-to"
+                         id="time-to"
+                         class="form-control timepicker"
+                         step="600"
+                         min="06:00"
+                         max="22:00"
+                         required />
+                </div>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn-success d-block mx-auto" id="submit-btn">
+              Submit
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/register.css') }}" />
+
+{% endblock %} {% block content %}
+
+<header class="title rounded-pill shadow mx-auto">
+  <h1><a href="/">tutorNET</a></h1>
+</header>
+
+<main class="container mt-5">
+  <form action="/register" method="POST">
+    <div class="form-row justify-content-center mb-2 mx-1">
+      <div class="col-sm-4">
+        <label for="username">Username</label>
+        <input
+               type="text"
+               class="form-control"
+               name="username"
+               id="username"
+               aria-placeholder="username"
+               required />
+      </div>
+    </div>
+    <div class="form-row justify-content-center mb-2 mx-1">
+      <div class="col-sm-4">
+        <label for="password">Password</label>
+        <input
+               type="password"
+               class="form-control"
+               name="password"
+               id="password"
+               aria-placeholder="password"
+               required />
+      </div>
+    </div>
+    <div class="form-row justify-content-center mb-3 mx-1">
+      <div class="col-sm-4">
+        <label for="confirmation">Confirm your password</label>
+        <input
+               type="password"
+               class="form-control"
+               name="confirmation"
+               id="confirmation"
+               aria-placeholder="password confirmation"
+               aria-describedby="We don't store your password, only hashes."
+               required />
+        <small class="form-text text-muted">We don't store your password, only hashes.</small>
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+  </form>
+</main>
+<footer></footer>
+{% endblock %}

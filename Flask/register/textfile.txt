@@ -1,0 +1,10 @@
+┌────┬─────────────────┬───────────────────────┐
+│ id │      name       │         email         │
+├────┼─────────────────┼───────────────────────┤
+│ 1  │ Alice           │ alice@example.com     │
+│ 2  │ Bob             │ bob@example.com       │
+│ 3  │ Charlie         │ charlie@yahoo.com     │
+│ 4  │ Fernando        │ ffvillaca07@gmail.com │
+│ 5  │ Diego Fernandes │ diego@bol.com.br      │
+│ 6  │ Fernando        │ diego@bol.com.br      │
+└────┴─────────────────┴───────────────────────┘

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %} {% block title %} Portfolio {% endblock %} {% block main %}
+<table class="table table-striped">
+	<thead>
+		<tr class="bg-info">
+			<th>Symbol</th>
+			<th>Name</th>
+			<th>Shares</th>
+			<th>Price</th>
+			<th>TOTAL</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in stocks_table %}
+		<tr>
+			<td>{{ row['symbol'] }}</td>
+			<td>{{ row['name'] }}</td>
+			<td>{{ row['shares'] }}</td>
+			<td>{{ row['price'] | usd }}</td>
+			<td>{{ (row['shares'] * row['price']) | usd }}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="4" class="left">CASH</td>
+			<td>{{ cash | usd }}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="4"></td>
+			<td><strong>{{ (stocks_value + cash) | usd }}</strong></td>
+		</tr>
+	</tfoot>
+</table>
+<p class="index-date">Last checked on {{ date }}</p>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+<link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/find-teacher.css') }}" />
+
+{% endblock styles %}
+
+{% block content %}
+
+<header class="shadow">
+  {% if session['user_id'] %}
+  <a class="home rounded-pill" href="/profile">tutorNET</a>
+  {% else %}
+  <a class="home rounded-pill" href="/">tutorNET</a>
+  {% endif %}
+  <p class="title">Filter by subject and weekday to find available teachers</p>
+</header>
+
+<div class="container">
+  <form action="/find-teacher" method="POST" id="filter">
+    <div class="form-group row justify-content-center mt-4">
+      <div class="col">
+        <select name="subject" id="subject" class="custom-select">
+          <option value="" disabled selected hidden>Select a subject</option>
+          <option>English</option>
+          <option>Math</option>
+          <option>Biology</option>
+          <option>Chemistry</option>
+          <option>Earth Sciences</option>
+          <option>Physics</option>
+          <option>Geography</option>
+          <option>History</option>
+          <option>Foreign Languages</option>
+          <option>Extra</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row justify-content-center mt-4">
+      <div class="col">
+        <select name="weekday" id="weekday" class="custom-select">
+          <option value="" disabled selected hidden>Select a weekday</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary d-block mx-auto">Filter</button>
+  </form>
+</div>
+
+<main class="container px-0 subject-list">
+  <div class="card-body px-2">
+    {% if teachers %}
+
+    {% for teacher in teachers if (teacher.name and teacher.bio and teacher.photo and teacher.phone and teacher.subjects) %}
+
+    <div class="subject-container mt-4">
+      <img
+           src="{{ teacher.photo }}"
+           alt="profile photo"
+           class="photo float-left rounded-circle" />
+      <div class="teacher">
+        <p class="name">{{ teacher.name }}</p>
+        <p class="biography">{{ teacher.bio }}</p>
+      </div>
+
+      {% for subject in teacher.subjects %}
+      <div class="subject p-2 mb-3">
+
+        <p>{{ subject.subject }}</p>
+
+        <div class="datetime">
+
+          {% for schedule in subject.schedules %}
+          <p>{{ schedule.weekday }}<br />From: <span>{{ schedule.time_from }}</span> <br />To:
+            <span>{{ schedule.time_to }}</span></p>
+          {% endfor %}
+
+        </div>
+      </div>
+      {% endfor %}
+
+      <a
+         href="https://api.whatsapp.com/send?phone={{ teacher.phone }}"
+         class="whatsapp btn btn-outline-secondary mx-auto mt-2 shadow"><img
+             src="{{ url_for('static', filename='icons/whatsapp.svg') }}"
+             alt="whatsapp link" />
+        Message Me</a>
+
+    </div>
+
+    {% endfor %}
+
+    {% else %}
+    <h3 class="text-muted text-center">No teacher found. Click on filter to show everyone</h3>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock content %}

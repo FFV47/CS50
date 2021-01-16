@@ -1,0 +1,209 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "main";
+
+body {
+	margin-top: 0;
+}
+
+header {
+	background-color: theme-color("secondary");
+	padding-top: 0.5rem;
+	padding-bottom: 0.1rem;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+
+	.home {
+		@include brand(theme-color("terciary"), 2.3rem);
+		font-weight: bold;
+		text-align: center;
+		text-decoration: none;
+		border: 3px solid $primary;
+		padding: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+	.title {
+		text-align: center;
+		font-family: "Ubuntu", sans-serif;
+		color: $gray-300;
+	}
+}
+
+.toast {
+	border-radius: 1rem;
+	background-color: $primary;
+	position: absolute;
+	top: 3vh;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index: 1;
+
+	.toast-header {
+		border-radius: 0.9rem 0.9rem 0 0;
+	}
+
+	.toast-body {
+		color: white;
+	}
+}
+
+.custom-select,
+.btn-primary {
+	font-size: 0.8rem;
+}
+
+.btn-primary {
+	color: white;
+	width: 7rem;
+}
+
+.subject-container {
+	font-size: 0.8rem;
+	box-shadow: 3px 3px 20px 3px grey;
+	border-radius: 1rem;
+	padding: 1rem;
+	color: $gray-700;
+	font-family: "Ubuntu", sans-serif;
+
+	.photo {
+		height: 64px;
+		width: 64px;
+		object-fit: cover;
+		margin-right: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.teacher {
+		display: flex;
+		flex-flow: column;
+
+		.name {
+			font-weight: 500;
+			font-size: 0.9rem;
+			margin-bottom: 0;
+		}
+	}
+
+	.subject {
+		clear: both;
+		border: 3px solid $primary;
+		border-radius: 0.5rem;
+
+		> p {
+			text-align: center;
+			margin-bottom: 0;
+			font-family: "Righteous", sans-serif;
+			font-size: 1rem;
+			font-weight: bold;
+			color: $secondary;
+		}
+	}
+
+	.datetime {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-evenly;
+		p {
+			color: $gray-600;
+			font: {
+				family: "Ubuntu", sans-serif;
+				size: 0.8rem;
+				weight: 500;
+			}
+			padding: 0.5rem;
+			border-radius: 1rem;
+			box-shadow: 1px 1px 10px 0.5px grey;
+			width: 90px;
+			height: 75px;
+			margin: 0.5rem 0.2rem;
+			span {
+				float: right;
+			}
+		}
+	}
+}
+
+.whatsapp {
+	width: 11rem;
+	line-height: 2;
+	border-radius: 1rem;
+	display: block;
+}
+
+// MEDIA QUERIES
+
+@include media-breakpoint-up(md) {
+	header {
+		.home {
+			font-size: 3rem;
+		}
+	}
+
+	#filter {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-evenly;
+		max-width: 600px;
+		margin: auto;
+
+		div {
+			flex-basis: calc(100% / 2);
+		}
+	}
+
+	.subject-list {
+		max-width: 90%;
+	}
+
+	.custom-select,
+	.btn-primary {
+		font-size: 1rem;
+	}
+
+	.subject-container {
+		font-size: 1rem;
+
+		.photo {
+			margin-bottom: 1rem;
+		}
+
+		.subject > p {
+			font-size: 1.2rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.teacher {
+			.name {
+				font-size: 1.1rem;
+			}
+		}
+
+		.datetime {
+			justify-content: flex-start;
+
+			p {
+				margin-right: 0.8rem;
+				width: 110px;
+				height: 90px;
+				font-size: 1rem;
+			}
+		}
+	}
+
+	.whatsapp {
+		font-size: 1.25rem;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	header {
+		.home {
+			font-size: 4rem;
+		}
+	}
+
+	.subject-list {
+		max-width: 668px;
+	}
+}

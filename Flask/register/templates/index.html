@@ -1,0 +1,14 @@
+{% extends 'layout.html' %} {% block body %}
+
+<h1>Registrants</h1>
+<h2><a href="/register">Register Yourself Here</a></h2>
+<ul>
+	{% for row in rows %}
+	<li>
+		<h2>ID: {{row['id']}} Name: {{row['name']}}</h2>
+		<p>Email: {{row['email']}}</p>
+	</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

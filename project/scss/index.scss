@@ -1,0 +1,155 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "main";
+
+// GENERAL
+
+header {
+	height: 12vh;
+  width: 70%;
+  margin: auto;
+	background-color: theme-color("secondary");
+}
+
+header.title {
+	@include center();
+	@include brand(theme-color("terciary"));
+	h1 {
+		font-size: 2.3rem;
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+}
+
+footer {
+	height: 15vh;
+	background-color: theme-color("secondary");
+}
+
+.citation {
+	@include center();
+	font-size: 0.8rem;
+	color: $gray-500;
+}
+
+#login-btn {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
+main {
+	a svg {
+		margin-right: 0.5rem;
+		.bi {
+			color: $gray-400;
+		}
+  }
+
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+
+	.sub-title {
+		font-family: "Ubuntu", sans-serif;
+		font-size: 1.2rem;
+		color: theme-color("secondary");
+		margin-bottom: 0.5rem;
+		text-align: center;
+	}
+
+	.btn-outline-primary,
+	.btn-outline-secondary {
+		background-color: $gray-100;
+	}
+
+	.btn-outline-primary:hover {
+		color: white;
+	}
+
+	.btn-label {
+		padding: 0 0.5rem;
+		color: theme-color("success");
+		border: 2px solid theme-color("success");
+		border-radius: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.btn-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 1rem;
+		.btn {
+			font-family: "Ubuntu", sans-serif;
+			padding: 0.7rem;
+			font-weight: bold;
+		}
+		a {
+			width: 80%;
+		}
+	}
+}
+
+// MEDIA QUERIES
+
+@include media-breakpoint-up(md) {
+
+	header.title h1 {
+		font-size: 4rem;
+  }
+
+	.citation {
+		font-size: 0.9rem;
+  }
+
+	main {
+    height: 70vh;
+		.btn-wrapper {
+			// width: 130%;
+			justify-content: flex-start;
+			.btn {
+				font-size: 1.2rem;
+			}
+		}
+		.sub-title {
+			text-align: start;
+			font-size: 1.5rem;
+			width: max-content;
+		}
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	header.title h1 {
+		font-size: 5rem;
+	}
+	main {
+		.btn-wrapper {
+			// width: 150%;
+			justify-content: flex-start;
+
+			.btn {
+				font-size: 1.5rem;
+				padding: 1rem;
+			}
+		}
+		.sub-title {
+			font-size: 2rem;
+			margin-bottom: 1.5rem;
+		}
+	}
+}
+
+@include media-breakpoint-down(sm) {
+  header {
+    margin-bottom: 1rem;
+  }
+	.container .col-md {
+		@include center();
+		img {
+			height: 100%;
+		}
+	}
+}

@@ -1,0 +1,2 @@
+Fetch JSON with all stocks symbols and names
+https://cloud.iexapis.com/beta/ref-data/symbols?token=pk_ec0b460f357d475da7aeaf92410692a0

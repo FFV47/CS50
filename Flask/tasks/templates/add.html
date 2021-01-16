@@ -1,0 +1,110 @@
+{% extends 'layout.html' %} {% block style %}
+
+<style>
+	* {
+		box-sizing: border-box;
+	}
+	.container,
+	form {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	label,
+	input[type="text"] {
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+	input[type="submit"] {
+		display: block;
+		margin-top: 1rem;
+	}
+
+	.newtask {
+		margin-bottom: 1rem;
+	}
+
+	.task {
+		margin-bottom: 1rem;
+	}
+</style>
+
+{% endblock %} {% block body %}
+<div class="container">
+	<h1>Create Task</h1>
+	<button type="button" class="newtask">Create new task</button>
+
+	<form action="/add" method="POST">
+		<fieldset>
+			<legend>New Task(s)</legend>
+			<div class="task">
+				<label for="task">Task</label>
+				<input type="text" name="task" class="task-item" />
+				<input type="reset" value="Reset Field" />
+				<button type="button" class="removetask" disabled>Remove Task</button>
+			</div>
+		</fieldset>
+		<input type="submit" value="Submit Task(s)" id="submit-btn" disabled />
+	</form>
+</div>
+
+{% endblock %} {% block script %}
+
+<script>
+	const fieldset = document.querySelector("fieldset");
+
+	/** @type {HTMLButtonElement} */
+	const newTaskField = document.querySelector(".newtask");
+
+	/** @type {HTMLDivElement} */
+	const taskDiv = document.querySelector(".task");
+
+	/** @type {HTMLInputElement} */
+	const submitBtn = document.querySelector("#submit-btn");
+
+	submitBtn.on;
+
+	newTaskField.addEventListener("click", () => {
+		let newTask = taskDiv.cloneNode(true);
+		newTask.querySelector(".task-item").value = "";
+
+		newTask.querySelector(".removetask").addEventListener("click", function () {
+			this.parentNode.remove();
+		});
+		newTask.querySelector(".removetask").disabled = false;
+		newTask.querySelector(".task-item").addEventListener("keyup", (e) => {
+			if (e.target.value == "") {
+				submitBtn.disabled = true;
+			} else {
+				submitBtn.disabled = false;
+			}
+		});
+
+		fieldset.appendChild(newTask);
+	});
+
+	submitBtn.onclick = (e) => {
+		let taskList = document.querySelectorAll(".task-item");
+
+		for (let i = 0; i < taskList.length; i++) {
+			if (taskList[i].value == "") {
+				taskList[i].name = "";
+			}
+		}
+	};
+
+	window.onload = () => {
+		taskDiv.querySelector(".task-item").value = "";
+		taskDiv.querySelector(".task-item").onkeyup = (e) => {
+			if (e.target.value == "") {
+				submitBtn.disabled = true;
+			} else {
+				submitBtn.disabled = false;
+			}
+		};
+	};
+</script>
+
+{% endblock %}

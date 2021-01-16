@@ -1,0 +1,101 @@
+{% extends 'layout.html' %} {% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}" />
+
+{% endblock styles %} {% block scripts %}
+
+<script src="{{ url_for('static', filename='scripts/navActive.js') }}" defer></script>
+
+{% endblock scripts %} {% block content %}
+
+<header class="title rounded-pill shadow">
+  <h1>tutorNET</h1>
+</header>
+
+{% block nav %}
+
+<aside>
+  <nav
+       class="nav flex-column nav-pills align-items-center justify-content-center shadow-lg my-4 py-3 px-1">
+    <p id="user" class="rounded-pill mb-2">
+      {% if session["username"] %}
+      {{ session["username"] }}
+      {% else %}
+      no username
+      {% endif %}
+    </p>
+    <a class="nav-link" href="/profile">Profile</a>
+    <a class="nav-link" href="/update-profile">Update Profile</a>
+    <a class="nav-link" href="/subject-handler">Add/Remove Subject</a>
+    <a class="nav-link" href="/change-password">Change Password</a>
+    <a class="nav-link" href="/find-teacher">Find Teacher</a>
+    <a class="nav-link" href="/delete-account">Delete Account</a>
+    <a class="nav-link" href="/logout">Log Out</a>
+  </nav>
+</aside>
+
+{% endblock nav %}
+
+<main class="container my-4">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow mb-4">
+        <div class="card-body" id="card-body">
+          {% if teacher.photo %}
+          <img src="{{ teacher.photo }}" alt="profile photo"
+               class="profile-photo float-left rounded-circle" />
+          {% else %}
+          <img src="{{ url_for('static', filename='images/profile-avatar.jpg') }}"
+               alt="profile photo"
+               class="profile-photo float-left rounded-circle" />
+          {% endif %}
+
+          {% if teacher.name %}
+          <p class="clearfix mt-3">{{ teacher.name }}</p>
+          {% else %}
+          <p class="clearfix mt-3 text-muted">No name provided</p>
+          {% endif %}
+          <h5 class="card-title mb-2">Biography</h5>
+
+          {% if teacher.bio %}
+          <p class="card-text"> {{ teacher.bio }}</p>
+          {% else %}
+          <p class="card-text text-muted">No biography provided</p>
+          {% endif %}
+          <hr>
+          <h5 class="card-title">Phone Number</h5>
+          {% if teacher.phone %}
+          <p class="card-text"> {{ teacher.phone }}</p>
+          {% else %}
+          <p class="card-text text-muted">No phone number provided</p>
+          {% endif %}
+          <hr />
+          <h5 class="card-title">Current Classes</h5>
+          {% if subjects %}
+
+          {% for subject in subjects %}
+          <div class="subject p-2 mb-3">
+
+            <!-- <div class="d-flex align-items-center mb-2"> -->
+            <p class="subject-name text-primary">{{ subject.subject }}</p>
+            <!-- </div> -->
+            <div class="subject-schedule">
+              {% for schedule in subject.schedules %}
+              <p class="datetime">
+                {{ schedule.weekday }}<br />From: <span>{{ schedule.time_from }}</span> <br />To:
+                <span>{{ schedule.time_to }}</span>
+              </p>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          <p class="card-text text-muted">No classes registered</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

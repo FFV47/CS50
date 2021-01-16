@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Orbitron:wght@400;600;700&family=Righteous&family=Ubuntu:wght@400;500&display=swap"
+        rel="stylesheet" />
+
+  <link rel="shortcut icon"
+        href="{{ url_for('static', filename='icons/favicon.ico') }}"
+        type="image/x-icon" />
+
+  {% block styles %}
+  {% endblock styles %}
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"
+          defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+          crossorigin="anonymous"
+          defer></script>
+
+  {% block scripts %}
+  {% endblock scripts %}
+  <title>
+    {% block title %}
+    TutorNET
+    {% endblock title %}
+  </title>
+</head>
+
+<body>
+  <!-- Message Flashing -->
+  {% if get_flashed_messages() %}
+
+  <div class="toast"
+       role="alert"
+       aria-live="assertive"
+       aria-atomic="true"
+       data-delay="5000">
+    <div class="toast-header">
+      <strong class="mr-auto">tutorNET</strong>
+      <button type="button"
+              class="ml-2 mb-1 close"
+              data-dismiss="toast"
+              aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">{{ get_flashed_messages() | join(' ') }}</div>
+  </div>
+
+  {% endif %}
+
+  {% block content %}
+  {% block nav %}
+  {% endblock nav %}
+  {% endblock content %}
+
+</body>
+
+</html>

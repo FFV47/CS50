@@ -1,0 +1,42 @@
+@import "control-panel";
+
+#schedule {
+	font-size: 1.15rem;
+}
+
+.btn.btn-primary {
+	color: white;
+}
+
+.subject {
+	border: 3px solid $primary;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	label {
+		font-size: 1.1rem;
+		margin-bottom: 0.3rem;
+	}
+}
+
+// MEDIA QUERIES
+
+@include media-breakpoint-down(sm) {
+	fieldset.time-table {
+		margin-bottom: 1.25rem;
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.subject-list {
+    display: flex;
+    justify-content: space-between;
+		flex-flow: row wrap;
+
+		form {
+			flex-basis: calc(95% / 3);
+		}
+	}
+}

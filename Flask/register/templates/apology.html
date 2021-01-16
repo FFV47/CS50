@@ -1,0 +1,30 @@
+{% extends 'layout.html' %} {% block body %}
+
+<h1>Error</h1>
+<h2>{{ msg }}</h2>
+
+<h3 class="timer">Page will go back in 5 seconds</h3>
+
+{% endblock %} {% block script %}
+
+<script>
+	const timer = document.querySelector(".timer");
+
+	let count = 5;
+
+	window.onload = () => {
+		setInterval(() => {
+			if (count === 1) {
+				history.back();
+			}
+			count--;
+			timer.textContent = "Page will go back in " + count + " seconds";
+		}, 1000);
+	};
+
+	function goBack() {
+		history.back();
+	}
+</script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/fernando/CS50/pset7/movies/movies.db" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1496"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="directors"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="directors" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 5">SELECT name FROM people
+JOIN stars ON stars.person_id = people.id
+JOIN movies ON stars.movie_id = movies.id
+WHERE title IN
+(SELECT title FROM movies
+JOIN stars ON stars.movie_id = movies.id
+JOIN people ON stars.person_id = people.id
+WHERE name = 'Kevin Bacon' AND birth = 1958)</sql><sql name="13.sql">SELECT DISTINCT name FROM people
+JOIN stars ON stars.person_id = people.id
+JOIN movies ON stars.movie_id = movies.id
+WHERE name &lt;&gt; 'Kevin Bacon' AND title IN
+(SELECT title FROM movies
+JOIN stars ON stars.movie_id = movies.id
+JOIN people ON stars.person_id = people.id
+WHERE name = 'Kevin Bacon' AND birth = 1958)
+ORDER BY name</sql><current_tab id="1"/></tab_sql></sqlb_project>
